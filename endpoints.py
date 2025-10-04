@@ -4,11 +4,26 @@ from typing import List, Optional
 import sqlite3
 import json
 from datetime import datetime
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     title="City Travel Metrics API",
     description="API for accessing travel metrics for European cities",
     version="1.0.0"
+)
+
+
+origins = [
+    "http://localhost",
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],  # Pozwól na wszystkie metody HTTP (GET, POST, PUT, DELETE itp.)
+    allow_headers=["*"],  # Pozwól na wszystkie nagłówki w żądaniach
 )
 
 
